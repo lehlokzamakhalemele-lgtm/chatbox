@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,7 +91,12 @@ h1{font-size:26px;letter-spacing:-.02em;margin:0 0 8px}
 .m.gone{opacity:0;transform:scale(.92);filter:blur(4px)}
 .bar{height:2px;border-radius:2px;background:currentColor;opacity:.35;margin-top:5px;transform-origin:left;animation:shrink linear forwards}
 @keyframes shrink{from{transform:scaleX(1)}to{transform:scaleX(0)}}
-.compose{border-top:1px solid var(--line);padding:8px 12px 12px;background:var(--card)}
+.compose{
+  position:relative;
+  border-top:1px solid var(--line);
+  padding:8px 12px 12px;
+  background:var(--card)
+}
 .opts{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--mute);padding:0 2px 8px}
 select{background:var(--soft);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:4px 8px;font:inherit;font-size:12px}
 .row{display:flex;gap:6px;align-items:center}
@@ -115,7 +121,22 @@ select{background:var(--soft);color:var(--text);border:1px solid var(--line);bor
 #lb.on{display:flex}#lb img{max-width:100%;max-height:100%;border-radius:12px}
 
 /* dissolve button + animation */
-.dissolve{display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:12px;background:var(--dangerbg);color:var(--danger);font-size:13px;font-weight:600;transition:filter .15s}
+.dissolve{
+  position:absolute;
+  right:12px;
+  bottom:calc(100% + 6px);
+  z-index:5;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 12px;
+  border-radius:12px;
+  background:var(--dangerbg);
+  color:var(--danger);
+  font-size:13px;
+  font-weight:600;
+  transition:filter .15s
+}
 .dissolve:hover{filter:brightness(.96)}
 #s-chat.vanish #msgs>*,#s-chat.vanish .av,#s-chat.vanish .nm,#s-chat.vanish .who small,#s-chat.vanish .tabs{opacity:0;filter:blur(10px);transition:opacity .9s,filter .9s,transform .9s;transform:translateY(-8px) scale(.96)}
 #s-chat.vanish .nm{letter-spacing:.35em}
@@ -171,11 +192,13 @@ select{background:var(--soft);color:var(--text);border:1px solid var(--line);bor
     <button class="iconbtn" id="back" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
     <div class="av" id="hAv"></div>
     <div class="who"><span id="hdr"></span><small id="hStat"></small></div>
-    <button class="dissolve" id="dissolveBtn" title="Dissolve this chat"><svg viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M12 3c1 3 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-6 1-9z"/></svg>Dissolve</button>
   </div>
   <div class="tabs" id="tabs"></div>
   <div id="msgs"></div>
   <div class="compose">
+
+    <button class="dissolve" id="dissolveBtn" title="Dissolve this chat"><svg viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M12 3c1 3 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-6 1-9z"/></svg>Dissolve</button>
+
     <div class="panel" id="emo"></div>
     <div class="panel pho" id="pho">
       <div id="pickBtns" class="pick">
