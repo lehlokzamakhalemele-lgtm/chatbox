@@ -1,0 +1,22 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "names": {
+      "$n": {
+        ".read": "auth != null",
+        ".write": "auth != null && (!data.exists() || data.child('uid').val() === auth.uid)",
+        ".validate": "newData.hasChildren(['uid','name']) && newData.child('uid').val() === auth.uid && newData.child('name').isString() && newData.child('name').val().length > 0 && newData.child('name').val().length <= 20"
+      }
+    },
+    "inbox": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        "$mid": {
+          ".write": "auth != null && ((!data.exists() && newData.child('from').val() === auth.uid) || (data.exists() && !newData.exists() && auth.uid === $uid))",
+          ".validate": "newData.hasChildren(['from','fromName','type','v','ts']) && newData.child('from').val() === auth.uid && (newData.child('type').val() === 'text' || newData.child('type').val() === 'sticker' || newData.child('type').val() === 'dissolve' || newData.child('type').val() === 'photo') && newData.child('v').isString() && ((newData.child('type').val() === 'photo' && newData.child('v').val().length <= 200000 && newData.child('v').val().beginsWith('data:image/jpeg;base64,')) || (newData.child('type').val() !== 'photo' && newData.child('v').val().length <= 500)) && newData.child('fromName').isString() && newData.child('fromName').val().length <= 20 && newData.child('ts').isNumber()"
+        }
+      }
+    }
+  }
+}
